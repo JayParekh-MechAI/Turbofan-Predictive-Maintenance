@@ -1,0 +1,4 @@
+# Prevent uploading the dataset to GitHub
+/data
+# Ensure the placeholder still remains on GitHub
+!data/.gitkeep
