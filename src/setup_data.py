@@ -6,7 +6,7 @@ import os
 print("Downloading latest NASA dataset...")
 cache_path = kagglehub.dataset_download("behrad3d/nasa-cmaps")
 
-target_dir = 'data'
+target_dir = '../data'
 
 # 2. Search for the 'CMaps' folder specifically
 print("Finding the data source...")
