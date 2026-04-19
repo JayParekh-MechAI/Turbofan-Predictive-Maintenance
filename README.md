@@ -116,13 +116,13 @@ Run the scripts in this specific order to reproduce the results:
     # 1. Download NASA data
     python src/setup_data.py
 
-    # 2. Process data and engineer features
+    # 2. Process data and engineer features for the selected DATASET_ID
     python src/preprocess.py
 
-    # 3. Train the Random Forest model
+    # 3. Train the selected MODEL_TYPE on the chosen DATASET_ID
     python src/train.py
 
-    # 4. Generate final predictions & plot results
+    # 4. Generate final predictions & plot results for the the selected MODEL_TYPE on the chosen DATASET_ID
     python src/predict.py
     python src/visualize.py
 
