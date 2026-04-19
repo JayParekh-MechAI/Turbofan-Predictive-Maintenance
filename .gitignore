@@ -14,7 +14,6 @@ __pycache__/
 # Data & Models (Keep the repo light)
 data/processed/
 models/*.pkl
-results/
 
 # Editor Settings
 .vscode/
