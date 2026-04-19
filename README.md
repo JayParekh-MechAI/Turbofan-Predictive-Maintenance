@@ -93,6 +93,8 @@ Run the scripts in this specific order to reproduce the results:
 
 ## 🔮 Future Roadmap
 
+- [ ] Scalability: Support FD002 and FD004 multivariate datasets
+
 - [ ] Multi-Model Comparison: Implement XGBoost and LSTM architectures.
 
 - [ ] Interactive Dashboard: Build a Streamlit app for real-time monitoring.
