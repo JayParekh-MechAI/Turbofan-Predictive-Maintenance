@@ -42,7 +42,7 @@ Instead of using raw sensor data, I engineered features to capture **temporal tr
 │   └── visualize.py    # Performance Graphing
 ├── .gitignore          # Prevents large data/venv files from being tracked
 └── requirements.txt    # Dependency list
-
+```
 ---
 
 ### Part 3: The Installation & Setup
