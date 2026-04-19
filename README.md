@@ -34,6 +34,7 @@ Click to expand the results for each validated dataset:
 ![RUL Prediction FD003](results/prediction_plot_FD003.png)
 * **Insights:** Despite the added complexity of Fan Degradation, the model maintains a strong trend-line with an MAE of 17.56.*
 </details>
+
 ---
 
 ## 🛠️ The Engineering Pipeline
