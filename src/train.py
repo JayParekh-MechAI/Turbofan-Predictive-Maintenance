@@ -2,12 +2,14 @@ import pandas as pd
 import joblib
 import logging
 from sklearn.ensemble import RandomForestRegressor
+import xgboost
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import numpy as np
 
 # Constants
-DATASET_ID = 'FD001'
+DATASET_ID = 'FD003'
+MODEL_TYPE = 'xgboost' # Set to 'rf' for Random Forest or 'xgboost' for XGBoost
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
@@ -21,11 +23,18 @@ def train_model(x_path, y_path, model_save_path):
     # This lets us test the model on data it hasn't seen before
     X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    logging.info(f"Training Random Forest on {len(X_train)} samples...")
+    logging.info(f"Training {MODEL_TYPE} on {len(X_train)} samples...")
 
     # 2. Initialize and Train
-    # n_estimators=100 means 100 individual trees voting on the answer
-    model = RandomForestRegressor(n_estimators=100, max_depth=15, random_state=42, n_jobs=-1)
+    if MODEL_TYPE == 'xgboost':
+        from xgboost import XGBRegressor
+        # XGBoost learns sequentially, focusing on previous errors
+        model = XGBRegressor(n_estimators=100, learning_rate=0.05, max_depth=5, random_state=42, n_jobs=-1)
+    else:
+        from sklearn.ensemble import RandomForestRegressor
+        # RF builds trees in parallel and averages them
+        model = RandomForestRegressor(n_estimators=100, max_depth=15, random_state=42, n_jobs=-1)
+
     model.fit(X_train, y_train)
 
     # 3. Evaluate
@@ -47,5 +56,5 @@ if __name__ == "__main__":
     train_model(
         x_path=f'data/processed/X_train_{DATASET_ID}.csv',
         y_path=f'data/processed/y_train_{DATASET_ID}.csv',
-        model_save_path=f'models/random_forest_{DATASET_ID}.pkl'
+        model_save_path=f'models/{MODEL_TYPE}_{DATASET_ID}.pkl'
     )

@@ -7,32 +7,44 @@ This project focuses on **proactive maintenance** for aircraft engines. Using th
 ---
 
 ## 📊 Performance Summary
-The baseline **Random Forest Regressor** was validated across multiple NASA datasets to test its robustness against different failure modes.
+I benchmarked a **Random Forest (RF)** baseline against an **XGBoost (XGB)** regressor. While XGBoost showed superior precision on single-mode failure data (FD001), Random Forest proved more robust on complex, dual-mode failure data (FD003).
 
-| Dataset | Failure Modes | R² Score | MAE | RMSE | Status |
+| Dataset | Model | R² Score | MAE | RMSE | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **FD001** | HPC Degradation | **0.76** | **15.42** | **20.31** | ✅ Verified |
-| **FD003** | HPC + Fan Degradation | **0.73** | **17.56** | **22.47** | ✅ Verified |
+| **FD001** | Random Forest | 0.76 | 15.42 | 20.31 | Baseline |
+| **FD001** | **XGBoost** | **0.78** | **14.81** | **19.59** | 🏆 **Best for FD001** |
+| **FD003** | **Random Forest**| **0.71** | **17.56** | **22.47** | 🏆 **Best for FD003** |
+| **FD003** | XGBoost | 0.64 | 19.20 | 24.88 | Overfit Suspected |
+
+> **Key Insight:** XGBoost outperformed the baseline on FD001 by ~4%. However, for FD003, the Random Forest's ensemble averaging provided better generalization against the increased noise of dual failure modes.
 
 > **Note:** Interpretation of Metrics — MAE represents the average error in flight cycles. The model shows higher precision in the "Final 50 Cycles" (Near-Failure), which is critical for maintenance scheduling.
 
-### Prediction Accuracy
-Click to expand the results for each validated dataset:
+### 📈 Prediction Accuracy
+Click to expand the results for each validated dataset and compare model architectures:
 
 <details>
 <summary><b>View FD001 Results (Single Failure Mode)</b></summary>
 
-#### FD001: Actual vs. Predicted
-![RUL Prediction FD001](results/prediction_plot_FD001.png)
-* **Insights:** High precision in the "Final 50 Cycles," where maintenance decisions are critical.*
+#### Random Forest (Baseline)
+![RF FD001](results/prediction_plot_rf_FD001.png)
+
+#### XGBoost (Optimized)
+![XGBoost FD001](results/prediction_plot_xgboost_FD001.png)
+
+* **Insights:** XGBoost provided the best performance for FD001, achieving a tighter fit to the ground truth and reducing MAE to **14.81**. The model is highly reliable in the "Final 50 Cycles" critical window.
 </details>
 
 <details>
 <summary><b>View FD003 Results (Dual Failure Modes)</b></summary>
 
-#### FD003: Actual vs. Predicted
-![RUL Prediction FD003](results/prediction_plot_FD003.png)
-* **Insights:** Despite the added complexity of Fan Degradation, the model maintains a strong trend-line with an MAE of 17.56.*
+#### Random Forest (Baseline)
+![RF FD003](results/prediction_plot_rf_FD003.png)
+
+#### XGBoost (Experimental)
+![XGBoost FD003](results/prediction_plot_xgboost_FD003.png)
+
+* **Insights:** On this complex dataset with dual failure modes, the **Random Forest** actually generalized better with an MAE of **17.56**. XGBoost appeared to overfit to the noise, resulting in a higher MAE of **19.20**.
 </details>
 
 ---

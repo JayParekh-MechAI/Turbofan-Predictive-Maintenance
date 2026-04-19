@@ -9,7 +9,8 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
 # Constants
-DATASET_ID = 'FD001'
+DATASET_ID = 'FD003'
+MODEL_TYPE = 'rf' # Set to 'rf' for Random Forest or 'xgboost' for XGBoost
 
 INDEX_NAMES = ['unit_nr', 'time_cycles']
 SETTING_NAMES = ['setting_1', 'setting_2', 'setting_3']
@@ -78,7 +79,7 @@ if __name__ == "__main__":
 
     results_df = run_inference(
         test_path=f'data/test_{DATASET_ID}.txt',
-        model_path=f'models/random_forest_{DATASET_ID}.pkl',
+        model_path=f'models/{MODEL_TYPE}_{DATASET_ID}.pkl',
         scaler_path=f'models/scaler_{DATASET_ID}.pkl'
     )
     
@@ -87,8 +88,8 @@ if __name__ == "__main__":
 
     # Save results
     os.makedirs('results', exist_ok=True)
-    results_df.to_csv(f'results/predictions_{DATASET_ID}.csv', index=False)
-    logging.info(f"Predictions saved to results/predictions_{DATASET_ID}.csv")
+    results_df.to_csv(f'results/predictions_{MODEL_TYPE}_{DATASET_ID}.csv', index=False)
+    logging.info(f"Predictions saved to results/predictions_{MODEL_TYPE}_{DATASET_ID}.csv")
 
     # The Final Scoring
     if os.path.exists(TRUTH_PATH):
