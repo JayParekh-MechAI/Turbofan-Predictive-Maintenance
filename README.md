@@ -18,7 +18,15 @@ I benchmarked a **Random Forest (RF)** baseline against an **XGBoost (XGB)** reg
 
 > **Key Insight:** XGBoost outperformed the baseline on FD001 by ~4%. However, for FD003, the Random Forest's ensemble averaging provided better generalization against the increased noise of dual failure modes.
 
-> **Note:** Interpretation of Metrics — MAE represents the average error in flight cycles. The model shows higher precision in the "Final 50 Cycles" (Near-Failure), which is critical for maintenance scheduling.
+### 📊 Interpretation of Metrics
+
+To evaluate the model's reliability for real-world maintenance, we track three key KPIs:
+
+* **R² Score (Coefficient of Determination):** Measures how well the model captures the engine's degradation trend. Our best result of **0.78** (FD001) indicates the model explains 78% of the variance in engine wear.
+* **MAE (Mean Absolute Error):** Represents the average "miss" in flight cycles. An MAE of **14.81** means our predictions are, on average, within 15 flights of the actual failure point.
+* **RMSE (Root Mean Square Error):** Similar to MAE but penalizes larger errors more heavily. Keeping this close to the MAE indicates we have fewer "extreme" misses where the model completely fails to predict a breakdown.
+
+**Maintenance Impact:** Both models show higher precision in the **"Final 50 Cycles"** (Near-Failure window). This is critical for scheduling: it allows airlines to maximize engine utility while ensuring the aircraft is grounded for service before a catastrophic failure occurs.
 
 ### 📈 Prediction Accuracy
 Click to expand the results for each validated dataset and compare model architectures:
