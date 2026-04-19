@@ -132,7 +132,7 @@ Run the scripts in this specific order to reproduce the results:
 
 - [ ] Scalability: Support FD002 and FD004 multivariate datasets
 
-- [ ] Multi-Model Comparison: Implement XGBoost and LSTM architectures.
+- [ ] Advanced Model Usage: Implement LSTM architecture.
 
 - [ ] Interactive Dashboard: Build a Streamlit app for real-time monitoring.
 
