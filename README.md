@@ -45,9 +45,6 @@ Instead of using raw sensor data, I engineered features to capture **temporal tr
 ```
 ---
 
-### Part 3: The Installation & Setup
-
----
 
 ## 🚀 Getting Started
 
