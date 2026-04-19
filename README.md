@@ -1,4 +1,4 @@
-a# ✈️ Turbofan Engine Predictive Maintenance
+# ✈️ Turbofan Engine Predictive Maintenance
 ### Estimating Remaining Useful Life (RUL) with NASA C-MAPSS
 
 ## 📌 Project Overview
