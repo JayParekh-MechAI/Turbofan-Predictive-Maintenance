@@ -9,6 +9,9 @@ from sklearn.preprocessing import MinMaxScaler
 # Pro Tip: Keeping these at the top makes the script "Config-driven"
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
+# Change this to 'FD001', 'FD002', 'FD003', or 'FD004'
+DATASET_ID = 'FD001'
+
 INDEX_NAMES = ['unit_nr', 'time_cycles']
 SETTING_NAMES = ['setting_1', 'setting_2', 'setting_3']
 SENSOR_NAMES = [f's_{i}' for i in range(1, 22)] 
@@ -57,21 +60,21 @@ class DataPipeline:
         # Scale
         if is_training:
             df[all_features] = self.scaler.fit_transform(df[all_features])
-            joblib.dump(self.scaler, 'models/scaler.pkl')
-            logging.info("Scaler fitted and saved to models/scaler.pkl")
+            joblib.dump(self.scaler, f'models/scaler_{DATASET_ID}.pkl')
+            logging.info(f"Scaler fitted and saved to models/scaler_{DATASET_ID}.pkl")
         else:
             # Load the scaler we fitted during training!
-            self.scaler = joblib.load('models/scaler.pkl')
+            self.scaler = joblib.load(f'models/scaler_{DATASET_ID}.pkl')
             df[all_features] = self.scaler.transform(df[all_features])
         
         # Save
         os.makedirs(output_dir, exist_ok=True)
         X = df[all_features]
-        X.to_csv(f"{output_dir}/X_{'train' if is_training else 'test'}.csv", index=False)
+        X.to_csv(f"{output_dir}/X_{f'train_{DATASET_ID}' if is_training else f'test_{DATASET_ID}'}.csv", index=False)
         
         if is_training:
             y = df['RUL']
-            y.to_csv(f"{output_dir}/y_train.csv", index=False)
+            y.to_csv(f"{output_dir}/y_train_{DATASET_ID}.csv", index=False)
             
         logging.info(f"Pipeline complete. Files saved to {output_dir}")
 
@@ -79,7 +82,7 @@ if __name__ == "__main__":
     pipeline = DataPipeline()
     # Path assumes you run from the project root
     pipeline.run(
-        input_path='data/train_FD001.txt', 
+        input_path=f'data/train_{DATASET_ID}.txt', 
         output_dir='data/processed', 
         is_training=True
     )

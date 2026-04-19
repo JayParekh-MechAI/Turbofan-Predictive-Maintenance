@@ -8,7 +8,9 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
-# Constants (Must match your preprocess.py)
+# Constants
+DATASET_ID = 'FD001'
+
 INDEX_NAMES = ['unit_nr', 'time_cycles']
 SETTING_NAMES = ['setting_1', 'setting_2', 'setting_3']
 SENSOR_NAMES = [f's_{i}' for i in range(1, 22)] 
@@ -72,12 +74,12 @@ def score_predictions(predictions_df, truth_path):
 
 if __name__ == "__main__":
     # Path to the answer key NASA provided
-    TRUTH_PATH = 'data/RUL_FD001.txt'
+    TRUTH_PATH = f'data/RUL_{DATASET_ID}.txt'
 
     results_df = run_inference(
-        test_path='data/test_FD001.txt',
-        model_path='models/random_forest.pkl',
-        scaler_path='models/scaler.pkl'
+        test_path=f'data/test_{DATASET_ID}.txt',
+        model_path=f'models/random_forest_{DATASET_ID}.pkl',
+        scaler_path=f'models/scaler_{DATASET_ID}.pkl'
     )
     
     print("\n--- SAMPLE PREDICTIONS (First 10 Engines) ---")
@@ -85,8 +87,8 @@ if __name__ == "__main__":
 
     # Save results
     os.makedirs('results', exist_ok=True)
-    results_df.to_csv('results/predictions.csv', index=False)
-    logging.info("Predictions saved to results/predictions.csv")
+    results_df.to_csv(f'results/predictions_{DATASET_ID}.csv', index=False)
+    logging.info(f"Predictions saved to results/predictions_{DATASET_ID}.csv")
 
     # The Final Scoring
     if os.path.exists(TRUTH_PATH):

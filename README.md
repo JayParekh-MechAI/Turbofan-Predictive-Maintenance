@@ -7,17 +7,33 @@ This project focuses on **proactive maintenance** for aircraft engines. Using th
 ---
 
 ## 📊 Performance Summary
-The current baseline model uses a **Random Forest Regressor** with customized rolling-window features.
+The baseline **Random Forest Regressor** was validated across multiple NASA datasets to test its robustness against different failure modes.
 
-| Metric | Score | Interpretation |
-| :--- | :--- | :--- |
-| **R² Score** | **0.76** | Captures 76% of the variance in engine decay. |
-| **MAE** | **15.42** | Average prediction is within ~15 flights of truth. |
-| **RMSE** | **20.31** | Penalizes larger errors; shows robust stability. |
+| Dataset | Failure Modes | R² Score | MAE | RMSE | Status |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **FD001** | HPC Degradation | **0.76** | **15.42** | **20.31** | ✅ Verified |
+| **FD003** | HPC + Fan Degradation | **0.73** | **17.56** | **22.47** | ✅ Verified |
+
+> **Note:** Interpretation of Metrics — MAE represents the average error in flight cycles. The model shows higher precision in the "Final 50 Cycles" (Near-Failure), which is critical for maintenance scheduling.
 
 ### Prediction Accuracy
-![RUL Prediction Results](results/prediction_plot.png)
+Click to expand the results for each validated dataset:
 
+<details>
+<summary><b>View FD001 Results (Single Failure Mode)</b></summary>
+
+#### FD001: Actual vs. Predicted
+![RUL Prediction FD001](results/prediction_plot_FD001.png)
+* **Insights:** High precision in the "Final 50 Cycles," where maintenance decisions are critical.*
+</details>
+
+<details>
+<summary><b>View FD003 Results (Dual Failure Modes)</b></summary>
+
+#### FD003: Actual vs. Predicted
+![RUL Prediction FD003](results/prediction_plot_FD003.png)
+* **Insights:** Despite the added complexity of Fan Degradation, the model maintains a strong trend-line with an MAE of 17.56.*
+</details>
 ---
 
 ## 🛠️ The Engineering Pipeline

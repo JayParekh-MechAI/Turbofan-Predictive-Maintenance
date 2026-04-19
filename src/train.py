@@ -6,6 +6,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import numpy as np
 
+# Constants
+DATASET_ID = 'FD001'
+
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(levelname)s: %(message)s')
 
@@ -42,7 +45,7 @@ def train_model(x_path, y_path, model_save_path):
 
 if __name__ == "__main__":
     train_model(
-        x_path='data/processed/X_train.csv',
-        y_path='data/processed/y_train.csv',
-        model_save_path='models/random_forest.pkl'
+        x_path=f'data/processed/X_train_{DATASET_ID}.csv',
+        y_path=f'data/processed/y_train_{DATASET_ID}.csv',
+        model_save_path=f'models/random_forest_{DATASET_ID}.pkl'
     )

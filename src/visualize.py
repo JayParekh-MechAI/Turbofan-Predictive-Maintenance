@@ -4,10 +4,13 @@ import os
 import numpy as np
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 
+# Constants
+DATASET_ID = 'FD001'
+
 def create_viz():
     # Load the predictions and truth
-    preds_path = 'results/predictions.csv'
-    truth_path = 'data/RUL_FD001.txt'
+    preds_path = f'results/predictions_{DATASET_ID}.csv'
+    truth_path = f'data/RUL_{DATASET_ID}.txt'
     
     if not os.path.exists(preds_path):
         print("Error: Run src/predict.py first to generate results!")
@@ -41,7 +44,7 @@ def create_viz():
     plt.gca().text(0.05, 0.95, stats_text, transform=plt.gca().transAxes, fontsize=12,
                    verticalalignment='top', bbox=dict(boxstyle='round', facecolor='white', alpha=0.8))
 
-    plt.title('NASA Turbofan RUL Prediction: Actual vs Predicted (FD001)', fontsize=14)
+    plt.title(f'NASA Turbofan RUL Prediction: Actual vs Predicted ({DATASET_ID})', fontsize=14)
     plt.xlabel('Engine Samples (Sorted by Remaining Life)', fontsize=12)
     plt.ylabel('Remaining Useful Life (Cycles)', fontsize=12)
     plt.legend(loc='lower right')
@@ -49,8 +52,8 @@ def create_viz():
     
     # Save the plot
     os.makedirs('results', exist_ok=True)
-    plt.savefig('results/prediction_plot.png', dpi=300, bbox_inches='tight')
-    print("Chart saved to results/prediction_plot.png")
+    plt.savefig(f'results/prediction_plot_{DATASET_ID}.png', dpi=300, bbox_inches='tight')
+    print(f"Chart saved to results/prediction_plot_{DATASET_ID}.png")
     plt.show()
 
 if __name__ == "__main__":
