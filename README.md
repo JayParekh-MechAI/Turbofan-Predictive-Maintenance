@@ -98,3 +98,20 @@ Run the scripts in this specific order to reproduce the results:
 - [ ] Interactive Dashboard: Build a Streamlit app for real-time monitoring.
 
 - [ ] Cross-Dataset Validation: Extend support to FD002 and FD004.
+
+- [ ] API Deployment: Wrap the model in a FastAPI endpoint for real-time inference.
+
+---
+
+## 🤝 Contributing
+Contributions, issues, and feature requests are welcome! If you have suggestions for improving the model accuracy or adding new features, feel free to open an **issue** or submit a **pull request**.
+
+---
+
+## 👤 Author
+**Jay Parekh**
+* **LinkedIn:** [Jay Parekh](https://www.linkedin.com/in/jayspage/)
+* **Email:** [jayparekh01@hotmail.co.uk](mailto:jayparekh01@hotmail.co.uk)
+* **GitHub:** [@JayParekh-MechAI](https://github.com/JayParekh-MechAI)
+
+---
