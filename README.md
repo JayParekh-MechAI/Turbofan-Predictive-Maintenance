@@ -80,25 +80,18 @@ Instead of using raw sensor data, I engineered features to capture **temporal tr
 Run the scripts in this specific order to reproduce the results:
 
 # 1. Download NASA data
-    ```bash
     python src/setup_data.py
-    ```
 
 # 2. Process data and engineer features
-    ```bash
     python src/preprocess.py
-    ```
 
 # 3. Train the Random Forest model
-    ```bash
     python src/train.py
-    ```
 
 # 4. Generate final predictions & plot results
-    ```bash
     python src/predict.py
     python src/visualize.py
-    ```
+
 ---
 
 ## 🔮 Future Roadmap
