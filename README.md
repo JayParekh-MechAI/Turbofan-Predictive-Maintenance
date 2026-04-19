@@ -61,4 +61,43 @@ Instead of using raw sensor data, I engineered features to capture **temporal tr
    ```bash
    git clone [https://github.com/JayParekh-MechAI/Turbofan-Predictive-Maintenance.git](https://github.com/JayParekh-MechAI/Turbofan-Predictive-Maintenance.git)
    cd Turbofan-Predictive-Maintenance
-```
+    ```
+
+2. **Create & Activate Virtual Environment:**
+    ```bash
+    python -m venv .venv
+    ```
+    * **Windows:** `.venv\Scripts\activate`
+    * **Mac/Linux:** `source .venv/bin/activate`
+
+3. **Install Dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+---
+
+## 🏃 Execution Flow
+Run the scripts in this specific order to reproduce the results:
+    ```bash
+    # 1. Download NASA data
+    python src/data.py
+
+    # 2. Process data and engineer features
+    python src/preprocess.py
+
+    # 3. Train the Random Forest model
+    python src/train.py
+
+    # 4. Generate final predictions & plot results
+    python src/predict.py
+    python src/visualize.py
+    ```
+---
+
+## 🔮 Future Roadmap
+
+- [ ] Multi-Model Comparison: Implement XGBoost and LSTM architectures.
+
+- [ ] Interactive Dashboard: Build a Streamlit app for real-time monitoring.
+
+- [ ] Cross-Dataset Validation: Extend support to FD002 and FD004.
